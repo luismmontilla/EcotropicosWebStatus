@@ -1,0 +1,31 @@
+name: Append Data to CSV
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Schedule to run every hour
+
+jobs:
+  append_data:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up R
+      uses: r-lib/actions/setup-r@v1
+      with:
+        r-version: latest # Use the latest available R version
+
+    - name: Run R script
+      run: Rscript status_test.R
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.email "luism.montilla@gmail.com"
+        git config --global user.name "Luis M Montilla"
+        git add your_csv_file.csv
+        git commit -m "Append data to CSV"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.gh_token }}
