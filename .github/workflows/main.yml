@@ -30,7 +30,7 @@ jobs:
       run: |
         git config --global user.email "luism.montilla@gmail.com"
         git config --global user.name "Luis M Montilla"
-        git add status_test.csv
+        git add code_status.csv
         git commit -m "Append data to CSV"
         git push
       env:
