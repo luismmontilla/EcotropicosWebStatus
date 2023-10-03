@@ -1,21 +1,22 @@
-ifelse(!file.exists("code_status.csv"),
-       write.table(x= data.frame(date=as.character(),
-                                 status=as.numeric()),
-                   "code_status.csv",
-                   sep = ",",
-                   quote = FALSE),
-       FALSE)
+library(RCurl)
 
-headers <- curlGetHeaders("http://erevistas.saber.ula.ve/index.php/ecotropicos/index")
+web_status <- url.exists("http://erevistas.saber.ula.ve/index.php/ecotropicos/index",
+                  .header = TRUE)
 
-http_status <- attributes(headers)$status
 
-headers[1]
 
-code_status <- data.frame(date = Sys.time(),
-                          status = http_status)
+if(!file.exists("code_status.csv")) {
+  write.table(paste0(names(web_status), collapse = ","),
+              "code_status.csv",
+              sep = ",",
+              quote = FALSE,
+              row.names = FALSE,
+              col.names = FALSE)
+} else {
+  FALSE
+}
 
-write.table(code_status,
+write.table(matrix(web_status,ncol = 9),
             sep = ",",
             "code_status.csv",
             row.names = FALSE,
