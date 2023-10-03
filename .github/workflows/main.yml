@@ -17,6 +17,10 @@ jobs:
       with:
         r-version: latest # Use the latest available R version
 
+    - name: Install R dependencies
+      run: |
+        Rscript -e "install.packages('RCurl')"
+
     - name: Run R script
       run: Rscript status_test.R
 
