@@ -34,4 +34,4 @@ jobs:
         git commit -m "Append data to CSV"
         git push
       env:
-        GITHUB_TOKEN: ${{ secrets.gh_token }}
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
