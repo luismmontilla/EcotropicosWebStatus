@@ -3,7 +3,8 @@ name: Append Data to CSV
 on:
   schedule:
     - cron: '0 * * * *' # Schedule to run every hour
-
+permissions:
+  contents: write
 jobs:
   append_data:
     runs-on: ubuntu-latest
